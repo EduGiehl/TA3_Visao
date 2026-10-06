@@ -34,7 +34,10 @@ def transformaPerspectiva(img, pontos):
     (largSaida, altSaida) = calcTam(pontos)
     ptsSaida = [(0,0), (largSaida-1, 0), (largSaida-1, altSaida-1), (0, altSaida-1)]
 
-    M = cv.getPerspectiveTransform(pontos, ptsSaida)
+    pontos_np = np.array(pontos, dtype=np.float32)
+    ptsSaida_np = np.array(ptsSaida, dtype=np.float32)
+
+    M = cv.getPerspectiveTransform(pontos_np, ptsSaida_np)
     imgTrans = cv.warpPerspective(img, M, (largSaida, altSaida))
     return imgTrans
 
